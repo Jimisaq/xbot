@@ -1,27 +1,30 @@
 import tweepy
-import random
 import logging
 import datetime
 import time
+import schedule
 
-# Tweepy authentication
-API_KEY = '8cX1q5YZIfsUrnMrauUS7XnjD'
-API_SECRET = '6pzffkZGkzqUyWXO0PLnoV71VcwuTnM0k8XtGL6MHAdJZxmZKN'
-ACCESS_TOKEN = '1939963629522034688-3wrhImORGAif3vZ1eTWcgBWStpWQMR'
-ACCESS_SECRET = 'jrW7g7ZUfguu1pB7grZmVmQ4ecBpbZMMlpho3XTjciJXB'
+# API credentials
+API_KEY = 'GqFRkE0i74LAK2Kr2PDEs78MF'
+API_SECRET = 'aZI5nfGEJXsN7fe28kDeHw8A7hPZUm7ktBycJ4MJSOIKNGJr4p'
+ACCESS_TOKEN = '1940400565542162433-a3wpE6Y2oCEc7hHEFuIYn5frnq9JOn'
+ACCESS_SECRET = 'ciyj5XYOOUZzKrmoJODjBDrDDAGMWWohxWd9QFfY5vkJK'
 
-auth = tweepy.OAuth1UserHandler(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
-api = tweepy.API(auth)
-
-# Logging
+# Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
-# Posts - 30 engaging Python tips and facts for daily posting
+# Initialize Tweepy Client for API v2
+client = tweepy.Client(
+    consumer_key=API_KEY,
+    consumer_secret=API_SECRET,
+    access_token=ACCESS_TOKEN,
+    access_token_secret=ACCESS_SECRET
+)
+
+# Daily Python tips
 post_ideas = [
     "💡 Did you know? Python is named after the British comedy group Monty Python!",
     "⚡ Tip: Use list comprehensions for cleaner and more efficient code in Python.",
-    "📚 Python's Zen: 'Readability counts.' Always write code that is easy to read and understand.",
-    "🎉 Fun fact: Python was created by Guido van Rossum and first released in 1991.",
     "🔄 Python supports multiple programming paradigms: procedural, object-oriented, and functional programming.",
     "💬 Did you know? Python has a built-in function called 'help()' that provides documentation for any object or module.",
     "📖 Python's standard library is vast and includes modules for everything from web development to data analysis.",
@@ -52,20 +55,18 @@ post_ideas = [
 
 def post_today_message():
     today = datetime.date.today()
-    start_date = datetime.date(2025, 6, 30)  # Set your starting date
+    start_date = datetime.date(2025, 6, 30)
     index = (today - start_date).days % len(post_ideas)
 
     message = post_ideas[index]
     try:
-        api.update_status(message)
+        client.create_tweet(text=message)
         logging.info(f"Posted: {message}")
     except Exception as e:
         logging.error(f"Failed to post: {e}")
 
-# Scheduler (once per day at a fixed time)
-import schedule
-
-schedule.every().day.at("11:57").do(post_today_message)
+# Schedule to run daily at a specific time
+schedule.every().day.at("16:59").do(post_today_message)
 
 if __name__ == "__main__":
     logging.info("Starting post agent...")
