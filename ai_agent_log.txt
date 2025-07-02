@@ -1,2 +1,7 @@
 ERROR:root:Tweet post error: 403 Forbidden
 Your client app is not configured with the appropriate oauth1 app permissions for this endpoint.
+
+client id  =  Q2M4N3RiR21aa29sNXJXREFBNW06MTpjaQ
+secret = JJtFmUhoAsEQk3YdQLVcoV4ba0IFz6wdGTe8trRlR6_7qB6VJF
+
+JJtFmUhoAsEQk3YdQLVcoV4ba0IFz6wdGTe8trRlR6_7qB6VJF
