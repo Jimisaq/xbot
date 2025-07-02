@@ -25,7 +25,6 @@ client = tweepy.Client(
 post_ideas = [
     "💡 Did you know? Python is named after the British comedy group Monty Python!",
     "⚡ Tip: Use list comprehensions for cleaner and more efficient code in Python.",
-    "🔄 Python supports multiple programming paradigms: procedural, object-oriented, and functional programming.",
     "💬 Did you know? Python has a built-in function called 'help()' that provides documentation for any object or module.",
     "📖 Python's standard library is vast and includes modules for everything from web development to data analysis.",
     "🌐 Tip: Use virtual environments to manage dependencies for different Python projects.",
@@ -66,7 +65,7 @@ def post_today_message():
         logging.error(f"Failed to post: {e}")
 
 # Schedule to run daily at a specific time
-schedule.every().day.at("16:59").do(post_today_message)
+schedule.every().day.at("17:18").do(post_today_message)
 
 if __name__ == "__main__":
     logging.info("Starting post agent...")
